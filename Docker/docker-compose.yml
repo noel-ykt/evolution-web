@@ -3,13 +3,15 @@ version: '3.8'
 services:
   app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: Docker/Dockerfile
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
     container_name: node-app
+    networks:
+      - app-network
 
   nginx:
     image: nginx:latest
@@ -20,7 +22,9 @@ services:
     depends_on:
       - app
     container_name: nginx-proxy
+    networks:
+      - app-network
 
 networks:
-  default:
+  app-network:
     driver: bridge

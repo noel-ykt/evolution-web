@@ -4,14 +4,14 @@ FROM node:22
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json
-COPY package*.json ./
+# Копируем package.json и package-lock.json из папки app
+COPY app/package*.json ./
 
 # Устанавливаем зависимости
 RUN npm install
 
-# Копируем исходный код
-COPY . .
+# Копируем весь исходный код из папки app
+COPY app/ ./
 
 # Устанавливаем переменную окружения
 ENV NODE_ENV=production
